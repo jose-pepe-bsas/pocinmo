@@ -7,12 +7,16 @@ import express from 'express';
 import multer from 'multer';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 const agreement_path = "/chat/2/proposal/3";
+const documentsPath = __dirname+"/uploads"
+
+ 
 
 const upload = multer({ dest: "uploads/" });
 
@@ -26,6 +30,9 @@ app.get("/",  (req, res) => {
 
 //CASE: proponer un contrato
 app.post(agreement_path, upload.array('files', 10), async function (req, res) {
+if (!fs.existsSync(documentsPath)) {
+  fs.mkdirSync(documentsPath);
+}
   let proposalDTO = new ProposalDTO({
     documents : req.files,
     offerentID : req.body.offerentID,
