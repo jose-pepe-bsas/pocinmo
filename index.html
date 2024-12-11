@@ -1,0 +1,29 @@
+
+<form id="uploadForm" action="http://localhost:8001/chat/2/proposal/3" method="POST" enctype="multipart/form-data">
+        <!-- Campo: documents (archivos MIME) -->
+        <label for="documents">Documents (Archivos MIME):</label>
+        <input type="file" id="file" name="files" multiple accept="application/pdf,application/msword,image/*" required><br><br>
+
+        <!-- Campo: offerentID (Arr<int>) -->
+        <label for="offerentID">Offerent ID (IDs de oferentes):</label>
+        <input type="text" id="offerentID" name="offerentID" placeholder="Ej. 1,2,3" required><br><br>
+
+        <!-- Campo: demandID (Arr<int>) -->
+        <label for="demandID">Demand ID (IDs de demandantes):</label>
+        <input type="text" id="demandID" name="demandID" placeholder="Ej. 4,5,6" required><br><br>
+
+        <!-- Campo: proposed_validity_days (int) -->
+        <label for="proposed_validity_days">Proposed Validity Days (Días de validez propuestos):</label>
+        <input type="number" id="proposed_validity_days" name="proposed_validity_days" min="1" required><br><br>
+
+        <!-- Campo: currency (charstring) -->
+        <label for="currency">Currency (Moneda):</label>
+        <input type="text" id="currency" name="currency" required><br><br>
+
+        <!-- Campo: offering (ABSofferingDTO) -->
+        <label for="offering">Offering (Oferta):</label>
+        <textarea id="offering" name="offering" rows="4" cols="50" required></textarea><br><br>
+
+        <!-- Enviar el formulario -->
+        <button type="submit">Enviar</button>
+    </form>
