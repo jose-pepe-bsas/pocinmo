@@ -5,24 +5,27 @@ import { Agreement } from "./src/agreement/agreement.js";
 
 import express from 'express';
 import multer from 'multer';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-const path = "/chat/2/proposal/3";
+const agreement_path = "/chat/2/proposal/3";
 
 const upload = multer({ dest: "uploads/" });
 
-app.get(path,  (req, res) => {
-    res.send("Hola! hace un post");
+app.get(agreement_path,  (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get("/",  (req, res) => {
-    res.send("Hola! hace un post a "+path);
+    res.send("Hola! hace un post a "+agreement_path);
 });
 
 //CASE: proponer un contrato
-app.post(path, upload.array('files', 10), async function (req, res) {
+app.post(agreement_path, upload.array('files', 10), async function (req, res) {
   let proposalDTO = new ProposalDTO({
     documents : req.files,
     offerentID : req.body.offerentID,
